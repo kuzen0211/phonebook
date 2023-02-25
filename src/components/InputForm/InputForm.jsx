@@ -1,6 +1,34 @@
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addContact } from 'redux/contacts/operations.js';
+import { selectContacts } from 'redux/contacts/selectors.js';
+
 export const InputForm = () => {
+  const contacts = useSelector(selectContacts);
+  const dispatch = useDispatch();
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+
+    const form = evt?.target;
+    const { name, number } = form.elements;
+    const contactName = name.value.trim();
+    const contactPhone = number.value.trim();
+
+    if (
+      !contacts.some(
+        contact =>
+          contact.name.toLowerCase().trim() === contactName.toLowerCase()
+      )
+    ) {
+      form.reset();
+
+      dispatch(addContact({ name: contactName, number: contactPhone }));
+    } else {
+    }
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label>
         Name
         <input
