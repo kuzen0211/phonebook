@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { toastError } from 'components/Layout';
+
 import { logOut } from 'redux/auth/operations';
 
 import {
@@ -59,7 +59,6 @@ const contactsSlice = createSlice({
         ({ error, isLoading }, { payload }) => {
           error = payload;
           isLoading = false;
-          toastError('Wrong');
         }
       );
   },

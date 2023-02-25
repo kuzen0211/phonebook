@@ -2,22 +2,25 @@ import { useDispatch } from 'react-redux';
 
 import { setFilter } from 'redux/filter/slice';
 
+import { Label, Input } from './Filter.styled';
+
 export const Filter = () => {
   const dispatch = useDispatch();
 
   const handlerFilterChange = evt => {
     dispatch(setFilter(evt?.target?.value));
   };
+
   return (
-    <label>
+    <Label>
       Find contacts by name
-      <input
+      <Input
         type="text"
         name="filter"
         title="Filter is case unsensitive."
-        required
         onChange={handlerFilterChange}
+        required
       />
-    </label>
+    </Label>
   );
 };

@@ -1,7 +1,10 @@
+import { toastMessage } from 'components/Layout.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addContact } from 'redux/contacts/operations.js';
 import { selectContacts } from 'redux/contacts/selectors.js';
+
+import { Input, Label, Button, Form } from './InputForm.styled.js';
 
 export const InputForm = () => {
   const contacts = useSelector(selectContacts);
@@ -25,13 +28,15 @@ export const InputForm = () => {
 
       dispatch(addContact({ name: contactName, number: contactPhone }));
     } else {
+      toastMessage('Contact with such name exists yet.');
     }
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <Form onSubmit={handleSubmit}>
+      <Label>
         Name
-        <input
+        <Input
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -39,10 +44,10 @@ export const InputForm = () => {
           required
           autoComplete="off"
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Phone
-        <input
+        <Input
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -50,8 +55,8 @@ export const InputForm = () => {
           required
           autoComplete="off"
         />
-      </label>
-      <button type="submit">Add contact</button>
-    </form>
+      </Label>
+      <Button type="submit">Add contact</Button>
+    </Form>
   );
 };
